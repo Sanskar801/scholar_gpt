@@ -116,11 +116,10 @@ Where would you like to start our exploration?
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 text-sm rounded-t-lg transition-colors ${
-                activeTab === tab.id
+              className={`flex items-center gap-2 px-4 py-2 text-sm rounded-t-lg transition-colors ${activeTab === tab.id
                   ? "bg-white border-b-2 border-sky-500 text-gray-900"
                   : "text-gray-600 hover:bg-gray-100"
-              }`}
+                }`}
             >
               {tab.title}
               {tab.id !== "home" && (
@@ -143,16 +142,6 @@ Where would you like to start our exploration?
 
         {/* Content */}
         <div className="flex-1 overflow-hidden relative">
-          {/* Background pattern */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute top-20 left-20 text-6xl text-gray-400 font-bold rotate-[-15deg]">MATH</div>
-            <div className="absolute top-40 right-32 text-5xl text-gray-400 font-bold rotate-[10deg]">QUIZ?</div>
-            <div className="absolute bottom-40 left-40 text-4xl text-gray-400 font-bold rotate-[-5deg]">📐</div>
-            <div className="absolute bottom-20 right-20 text-6xl text-gray-400 font-bold rotate-[5deg]">SCIENCE</div>
-            <div className="absolute top-1/2 left-1/4 text-5xl text-teal-300">+</div>
-            <div className="absolute top-1/3 right-1/4 text-4xl text-teal-300">+</div>
-          </div>
-
           {activeTab === "home" ? (
             <MainContent
               onSendMessage={(content) => {

@@ -1,14 +1,10 @@
-import type React from "react"
-
 import { useState, useRef, useEffect } from "react"
 import type { Chat, Message } from "../types/chat"
-import plusIcon from "../assets/icons/plus.svg"
-import micIcon from "../assets/icons/mic.svg"
-import sendIcon from "../assets/icons/send.svg"
 import shareIcon from "../assets/icons/share.svg"
 import moreIcon from "../assets/icons/more.svg"
 import wiseOwlIcon from "../assets/icons/wise-owl.svg"
 import userIcon from "../assets/icons/user.svg"
+import { ChatInput } from "./ChatInput"
 
 interface ChatViewProps {
   chat: Chat
@@ -16,7 +12,6 @@ interface ChatViewProps {
 }
 
 export function ChatView({ chat, onSendMessage }: ChatViewProps) {
-  const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -28,14 +23,10 @@ export function ChatView({ chat, onSendMessage }: ChatViewProps) {
     scrollToBottom()
   }, [chat.messages])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (input.trim()) {
-      onSendMessage(input.trim())
-      setInput("")
-      setIsLoading(true)
-      setTimeout(() => setIsLoading(false), 1500)
-    }
+  const handleSend = (content: string) => {
+    onSendMessage(content)
+    setIsLoading(true)
+    setTimeout(() => setIsLoading(false), 1500)
   }
 
   return (
@@ -73,26 +64,7 @@ export function ChatView({ chat, onSendMessage }: ChatViewProps) {
 
       {/* Chat Input */}
       <div className="p-4">
-        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-          <div className="flex items-center gap-3 bg-sky-50 rounded-full px-4 py-3 border border-sky-200">
-            <button type="button" className="w-8 h-8 rounded-full bg-sky-500 flex items-center justify-center text-white">
-              <img src={plusIcon} alt="Add attachment" className="w-5 h-5" />
-            </button>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask anything to wise owl"
-              className="flex-1 bg-transparent outline-none text-gray-700 placeholder-gray-500"
-            />
-            <button type="button" className="p-2 text-sky-500 hover:text-sky-600">
-              <img src={micIcon} alt="Voice input" className="w-5 h-5" />
-            </button>
-            <button type="submit" className="p-2 text-sky-500 hover:text-sky-600">
-              <img src={sendIcon} alt="Send message" className="w-5 h-5" />
-            </button>
-          </div>
-        </form>
+        <ChatInput onSubmit={handleSend} className="max-w-3xl mx-auto" placeholder="Ask anything to wise owl" />
       </div>
     </div>
   )
