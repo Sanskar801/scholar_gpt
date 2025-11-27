@@ -10,11 +10,42 @@ export default function Home() {
     const [activeTab, setActiveTab] = useState("home")
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
     const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
+    
     const [chats, setChats] = useState<Chat[]>([
         {
             id: "maths-homework",
             title: "Maths homework",
-            messages: [],
+            messages: [
+                { 
+                    id: "m1", 
+                    role: "user", 
+                    content: "Can you help me solve this quadratic equation: x^2 - 5x + 6 = 0?" 
+                },
+                {
+                    id: "m2",
+                    role: "assistant",
+                    content: `I'd be happy to help you solve that quadratic equation!
+
+To solve x² - 5x + 6 = 0, we can use the factoring method. We need to find two numbers that multiply to +6 and add up to -5.
+
+Thinking about the factors of 6:
+• 1 and 6 (adds to 7)
+• -1 and -6 (adds to -7)
+• 2 and 3 (adds to 5)
+• -2 and -3 (adds to -5) ✅
+
+So, the numbers are -2 and -3. We can factor the equation as:
+(x - 2)(x - 3) = 0
+
+Now, we set each factor to zero to find the solutions:
+1. x - 2 = 0  →  x = 2
+2. x - 3 = 0  →  x = 3
+
+The solutions are x = 2 and x = 3.
+
+Would you like to try another problem or see the quadratic formula method instead?`
+                }
+            ],
         },
         {
             id: "english-tenses",
